@@ -1,4 +1,4 @@
-CREATE VIEW view_all_months AS
+CREATE VIEW IF NOT EXISTS view_all_months AS
 SELECT '2025-06' AS month UNION ALL
 SELECT '2025-07' UNION ALL
 SELECT '2025-08' UNION ALL
@@ -22,7 +22,7 @@ group by
 	STRFTIME('%Y-%m' ,sell_date)
 ;
  /* The revenue trajectory is positive across the months. 
-  * The 74 was the highest number of sold units (74) on December followed by 18 in July and August.
+  * The highest number of units sold was 74 in December followed by 18 in July and August.
   * The least number of units sold was 5 in September and the main reason for this was the delay in products delivery. */
 
 --Which of my five assigned stores generated the most revenue?
@@ -325,7 +325,7 @@ select
   product_description,
   max(consecutive_zero_months) as months_without_sales
 from consecutive_streaks
-where consecutive_zero_months >= 3 and staff like 'lucy%'
+where consecutive_zero_months >= 3 and staff like 'Lucy%'
 group by staff, store, product_description
 order by months_without_sales desc;
 
